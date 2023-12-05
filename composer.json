@@ -51,6 +51,9 @@
         "setup": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php -r \"file_exists('.env.testing') || copy('.env.testing.example', '.env.testing');\"",
+            "docker-compose build",
+            "docker-compose up -d",
+            "docker-compose exec app bash",
             "composer install",
             "@php artisan key:generate",
             "@php artisan cache:clear",
