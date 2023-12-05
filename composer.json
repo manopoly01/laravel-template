@@ -48,12 +48,14 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "setup": [
+        "setup:docker": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php -r \"file_exists('.env.testing') || copy('.env.testing.example', '.env.testing');\"",
             "docker-compose build",
             "docker-compose up -d",
-            "docker-compose exec app bash",
+            "docker-compose exec app bash"
+        ],
+        "setup": [
             "composer install",
             "@php artisan key:generate",
             "@php artisan cache:clear",
