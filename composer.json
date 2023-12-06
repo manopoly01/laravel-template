@@ -48,20 +48,22 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "setup": [
+        "setup:docker": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php -r \"file_exists('.env.testing') || copy('.env.testing.example', '.env.testing');\"",
             "docker-compose build",
             "docker-compose up -d",
-            "docker-compose exec -T app composer install",
-            "docker-compose exec -T app php artisan key:generate",
-            "docker-compose exec -T app php artisan cache:clear",
-            "docker-compose exec -T app php artisan migrate",
-            "docker-compose exec -T app php artisan migrate --env=testing",
-            "docker-compose exec -T app php artisan storage:link",
-            "docker-compose exec -T app npm install --prefer-offline --no-audit",
-            "docker-compose exec -T app npm run build",
-            "docker-compose exec -T app npm run dev"
+            "docker-compose exec app bash"
+        ],
+        "setup": [
+            "composer install",
+            "@php artisan key:generate",
+            "@php artisan cache:clear",
+            "@php artisan storage:link",
+            "npm install --prefer-offline --no-audit",
+            "npm run build",
+            "@php artisan migrate",
+            "@php artisan migrate --env=testing"
         ]
     },
     "extra": {
