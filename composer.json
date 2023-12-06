@@ -60,10 +60,10 @@
             "@php artisan key:generate",
             "@php artisan cache:clear",
             "@php artisan storage:link",
-            "npm install --prefer-offline --no-audit",
-            "npm run build",
             "@php artisan migrate",
-            "@php artisan migrate --env=testing"
+            "@php artisan migrate --env=testing",
+            "npm install --prefer-offline --no-audit",
+            "npm run build"
         ]
     },
     "extra": {
