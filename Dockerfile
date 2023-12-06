@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # Set user and uid as build arguments
 ARG user
@@ -31,7 +31,8 @@ RUN mkdir -p /home/$user/.composer && \
 
 # Install Node.js and npm
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs
+RUN apt install -y nodejs
+RUN npm install -g npm@latest
 
 # Display Node.js and npm versions
 RUN node -v
