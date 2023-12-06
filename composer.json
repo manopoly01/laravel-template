@@ -56,11 +56,11 @@
         ],
         "setup": [
             "composer install",
-            "php artisan key:generate",
-            "php artisan cache:clear",
-            "php artisan storage:link",
-            "php artisan migrate",
-            "php artisan migrate --env=testing",
+            "@php artisan key:generate",
+            "@php artisan cache:clear",
+            "@php artisan storage:link",
+            "@php artisan migrate",
+            "@php artisan migrate --env=testing",
             "npm install --prefer-offline --no-audit",
             "npm run build"
         ]
