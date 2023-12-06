@@ -1,4 +1,10 @@
-Certainly! Here's the text in Markdown and English:
+<div style="display: flex">
+    <img src="https://vitejs.dev/logo-with-shadow.png" alt="Vite Logo" width="20%"/>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/512px-Tailwind_CSS_Logo.svg.png?20230715030042" alt="Tailwind CSS Logo" width="20%"/> 
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/800px-Laravel.svg.png" alt="Laravel Logo" width="20%"/> 
+    <img src="https://technisia.com/wp-content/uploads/2022/08/livewire-technisia.webp" alt="Livewire Logo" width="20%"/> 
+    <img src="https://miro.medium.com/v2/resize:fit:800/1*bc9pmTiyKR0WNPka2w3e0Q.png" alt="Node.js Logo" width="20%"/>
+</div>
 
 ## Clone GitHub Repository
 
