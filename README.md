@@ -1,4 +1,4 @@
-<div style="display: flex">
+<div style="display: flex; justify-content: center">
     <img src="https://vitejs.dev/logo-with-shadow.png" alt="Vite Logo" width="150"/>
     <img src="https://files.raycast.com/nwt9ncojkvwmjfkaada8upafvpnu" alt="Tailwind CSS Logo" width="150"/> 
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/800px-Laravel.svg.png" alt="Laravel Logo" width="150"/> 
