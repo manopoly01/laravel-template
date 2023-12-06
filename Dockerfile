@@ -11,7 +11,9 @@ RUN apt update && apt install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    gnupg
+    gnupg \
+    zip \
+    unzip
 
 # Clean up package cache
 RUN apt clean && rm -rf /var/lib/apt/lists/*
