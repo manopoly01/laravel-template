@@ -5,7 +5,7 @@ ARG user
 ARG uid
 
 # Install required dependencies
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
@@ -13,10 +13,12 @@ RUN apt update && apt install -y \
     libxml2-dev \
     gnupg \
     zip \
-    unzip
+    unzip \
+    nodejs \
+    npm
 
 # Clean up package cache
-RUN apt clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
@@ -28,11 +30,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
-
-# Install Node.js and npm
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt install -y nodejs
-RUN npm install -g npm@latest
 
 # Display Node.js and npm versions
 RUN node -v
