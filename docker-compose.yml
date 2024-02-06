@@ -1,9 +1,13 @@
-version: "3.7"
+version: "3.8"
+networks:
+    laravel:
+        driver: bridge
+
 services:
     app:
         build:
             args:
-                user: manuel
+                user: laravel
                 uid: 1000
             context: ./
             dockerfile: Dockerfile
@@ -11,50 +15,42 @@ services:
         ports:
             - 5173:5173
         container_name: laravel-app
-        restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - ./:/var/www
         networks:
             - laravel
     mysql:
-        image: mysql:8.0
         container_name: laravel-mysql
-        restart: unless-stopped
-        ports:
-            - 23306:3306
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
-            SERVICE_TAGS: dev
-            SERVICE_NAME: mysql
-        volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        image: mysql:latest
+        command: mysqld --sql_mode=""
         networks:
             - laravel
+        ports:
+            - "33306:3306"
+        volumes:
+            - mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: secret
     mysql-test:
-        image: mysql:8.0
         container_name: laravel-mysql-test
-        restart: unless-stopped
-        ports:
-            - 33306:3306
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
-            SERVICE_TAGS: dev
-            SERVICE_NAME: mysql
-        volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        image: mysql:latest
+        command: mysqld --sql_mode=""
         networks:
             - laravel
+        volumes:
+            - mysql_testing:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: laravel-test
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: laravel-test
+            MYSQL_PASSWORD: secret-test
     nginx:
         image: nginx:alpine
         container_name: laravel-nginx
-        restart: unless-stopped
         ports:
             - 8000:80
         volumes:
@@ -62,6 +58,7 @@ services:
             - ./docker-compose/nginx:/etc/nginx/conf.d/
         networks:
             - laravel
-networks:
-    laravel:
-        driver: bridge
+
+volumes:
+    mysql:
+    mysql_testing:
