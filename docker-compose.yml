@@ -3,10 +3,10 @@ services:
     app:
         build:
             args:
-                user: manuel
+                user: laravel
                 uid: 1000
             context: ./
-            dockerfile: Dockerfile
+            dockerfile: .docker/Dockerfile
         image: laravel
         ports:
             - 5173:5173
@@ -31,7 +31,7 @@ services:
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+            - mysql:/var/lib/mysql
         networks:
             - laravel
     mysql-test:
@@ -48,7 +48,7 @@ services:
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+            - mysql_testing:/var/lib/mysql
         networks:
             - laravel
     nginx:
@@ -59,9 +59,15 @@ services:
             - 8000:80
         volumes:
             - ./:/var/www
-            - ./docker-compose/nginx:/etc/nginx/conf.d/
+            - ./.docker/nginx:/etc/nginx/conf.d/
         networks:
             - laravel
 networks:
     laravel:
         driver: bridge
+
+volumes:
+    mysql:
+        driver: "local"
+    mysql_testing:
+        driver: "local"

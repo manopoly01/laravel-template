@@ -17,7 +17,7 @@ git clone https://github.com/manopoly01/laravel-template.git laravel-template
 Adjust the user as desired in the following file:
 
 ```yaml
-# docker-compose.yml (Line 6)
+# .docker.yml (Line 6)
 
 app:
     build:
@@ -50,7 +50,7 @@ Run the following commands:
 
 ```bash
 composer setup:docker
-docker-compose exec app bash
+.docker exec app bash
 composer setup
 ```
 
